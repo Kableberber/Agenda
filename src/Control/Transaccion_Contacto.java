@@ -1,5 +1,11 @@
 package Control;
 
+/**
+ * Clase de Control para ejecutar los DAO de la clase "Contacto"
+ *
+ * @author Roberto Herrera Díaz
+ * @version 1.0
+ */
 import Modelo.Contacto;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -15,6 +21,12 @@ public class Transaccion_Contacto {
     static String domicilio = "";
     static int usuario;
 
+    /**
+     * Método para extraer una fila de la tabla "Contacto" de la BD
+     *
+     * @throws SQLException
+     * @return r Retorna los datos obtenidos de la fila
+     */
     public static Contacto dameUnContactoDelaBD() {
 
         Contacto r = null;
@@ -40,6 +52,12 @@ public class Transaccion_Contacto {
         return r;
     }
 
+    /**
+     * Método para extraer la primera fila de la tabla "Contacto" de la BD
+     *
+     * @throws SQLException
+     * @return r Retorna los datos obtenidos de la fila
+     */
     public static Contacto dameelPrimero() {
         Contacto r = null;
 
@@ -63,6 +81,11 @@ public class Transaccion_Contacto {
         return r;
     }
 
+    /**
+     * Método para insertar un registro nuevo en la tabla "Contacto" de la BD
+     *
+     * @param x Recive como parámetro un objeto Contacto
+     */
     public static void insertaContacto(Contacto x) {
         String q = "INSERT INTO contacto VALUES ('" + x.getID_Contacto() + "','" + x.getNombre() + "','" + x.getA_Paterno() + "','" + x.getA_Materno() + "','" + x.getEdad() + "','" + x.getDomicilio() + "','" + x.getUsuario() + "')";
         ServiciosBD.ejecutarUpdate(q);
@@ -71,6 +94,11 @@ public class Transaccion_Contacto {
 
     }
 
+    /**
+     * Método para borrar un registro de la tabla "Contacto" de la BD
+     *
+     * @param id_Contacto Recive como parámetro el id de un Contacto
+     */
     public static void borrarContacto(int id_Contacto) {
         String q = "DELETE FROM contacto WHERE ID_Contacto ='" + id_Contacto + "'";
         ServiciosBD.ejecutarUpdate(q);
@@ -78,6 +106,11 @@ public class Transaccion_Contacto {
 
     }
 
+    /**
+     * Método para modificar un registro de la tabla "Contacto" de la BD
+     *
+     * @param x Recive como parámetro un objeto Contacto
+     */
     public static void modificarContacto(Contacto x) {
         String q = "UPDATE  Contacto  SET NOMBRE = '" + x.getNombre() + "'," + " A_PATERNO ='" + x.getA_Paterno() + "'," + " A_MATERNO ='" + x.getA_Materno() + "'," + " EDAD ='" + x.getEdad() + "'," + " DOMICILIO ='" + x.getDomicilio() + "' " + "WHERE ID_CONTACTO ='" + x.getID_Contacto() + "'";
         ServiciosBD.ejecutarUpdate(q);
@@ -85,6 +118,12 @@ public class Transaccion_Contacto {
 
     }
 
+    /**
+     * Método para buscar un registro por id en la tabla "Contacto" de la BD
+     *
+     * @param id_Contacto
+     * @return r Retorna un registro de la tabla "Contacto"
+     */
     public static Contacto buscarContacto(int id_Contacto) {
         Contacto r = null;
         String q = "SELECT *  FROM Contacto  " + "WHERE id_Contacto='" + id_Contacto + "'";
@@ -94,6 +133,12 @@ public class Transaccion_Contacto {
         return r;
     }
 
+    /**
+     * Método para buscar un registro en la tabla "Contaco" de la BD donde el id
+     * sea el registro maximo
+     *
+     * @return r Retorna un registro de la tabla "Contacto"
+     */
     public static Contacto buscarContactoID_Contacto() {
         Contacto r = null;
         String q = "SELECT * FROM Contacto WHERE id_Contacto=(SELECT MAX(ID_Contacto) FROM Contacto)";
@@ -102,5 +147,4 @@ public class Transaccion_Contacto {
         //JOptionPane.showMessageDialog(null, "Contacto Encontrado...");
         return r;
     }
-    
 }

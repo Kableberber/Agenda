@@ -1,7 +1,17 @@
 package Control;
 
+/**
+ * Clase para realizar la conexión entre la aplicación y la Base de Datos en
+ * PostgreSQL
+ *
+ * @author Roberto Herrera Díaz
+ * @version 1.0
+ */
 import java.sql.*;
 
+/*
+ * Construtor por defecto de ServiciosBD
+ */
 public class ServiciosBD {
 
     static Connection conexion;
@@ -9,6 +19,14 @@ public class ServiciosBD {
     static ResultSet resultado;
     static String query = "";
 
+    /**
+     * Método para realizar la conexion mediante el JDBC de Postgresql
+     *
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public static void conectar() {
         String ruta = "jdbc:postgresql://localhost:5432/Agenda_J";
         String usuario = "juanito";
@@ -34,6 +52,11 @@ public class ServiciosBD {
         }
     }
 
+    /**
+     * Método para ejecutar una consulta (Query) a la Base de Datos
+     *
+     * @param q String que se recibe como query, para ser ejecutado en la BD
+     */
     public static void ejecutarConsulta(String q) {
         query = q;
 
@@ -48,6 +71,12 @@ public class ServiciosBD {
         }
     }
 
+    /**
+     * Método para ejecutar consultas a la Base de Datos que no regresan datos
+     * como: INSERT, UPDATE, DELETE
+     *
+     * @param q String que se recibe como query, para ser ejecutado en la BD
+     */
     public static void ejecutarUpdate(String q) {
         query = q;
 
@@ -59,20 +88,5 @@ public class ServiciosBD {
             System.out.println("No lo Ejecuto, Error!!!");
             e.printStackTrace();
         }
-    }
-
-    public static void ConsultaArticulos(String q) {
-
-        query = q;
-
-        try {
-            ResultSet rs = sentencia.executeQuery(query);
-            System.out.println("Se Ejecuto Consulta...");
-
-        } catch (SQLException e) {
-            System.out.println("No lo Ejecuto, Error!!!");
-            e.printStackTrace();
-        }
-
     }
 }
